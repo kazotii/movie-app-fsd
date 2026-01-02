@@ -3,6 +3,9 @@ import filterReducer from "./filterSlice";
 import { movieApi } from "./movieApi";
 
 export const store = configureStore({
-  reducer: { filters: filterReducer, [movieApi.reducerPath]:movieApi.reducer },
-  middleware:(getDefaultMiddleware) => getDefaultMiddleware().concat(movieApi.middleware)
+  reducer: { filters: filterReducer, [movieApi.reducerPath]: movieApi.reducer },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(movieApi.middleware),
 });
+
+export type RootState = ReturnType<typeof store.getState>

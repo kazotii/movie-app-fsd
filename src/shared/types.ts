@@ -1,4 +1,4 @@
-interface Movie {
+export interface Movie {
   name: string;
   id: number;
   origin_country: string;
@@ -9,14 +9,14 @@ interface Movie {
   poster_path: string;
 }
 
-interface MovieDetails extends Movie {
+export interface MovieDetails extends Movie {
   imdb_id: number;
   adult: boolean;
   popularity: number;
   overview: string;
 }
 
-interface TmdbResponse<T> {
+export interface TmdbResponse<T> {
   page: number;
   results: T[];
   total_pages: number;
