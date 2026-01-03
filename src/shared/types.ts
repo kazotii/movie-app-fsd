@@ -9,11 +9,19 @@ export interface Movie {
   poster_path: string;
 }
 
+export interface Genre{
+  id: number,
+  name: string
+}
+
 export interface MovieDetails extends Movie {
   imdb_id: number;
   adult: boolean;
   popularity: number;
   overview: string;
+  runtime: number,
+  vote_average: number,
+  genres: Genre[]
 }
 
 export interface TmdbResponse<T> {

@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Homepage } from "./pages/HomePage";
-import { MovieDetails } from "./pages/MovieDetails";
-import { Layout } from "./pages/Layout";
+import { MovieDetails } from "./pages/MovieSinglePage";
+import { Layout } from "./Layout";
 import ErrorPage from "./pages/ErrorPage";
 
 export const MovieRouter = createBrowserRouter([

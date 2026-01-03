@@ -5,7 +5,7 @@ interface MovieCardProps {
   movie: FullMovie;
 }
 
-export const MovieCard = ({ movie }: MovieCardProps) => {
+export const MovieListItem = ({ movie }: MovieCardProps) => {
   return (
     <Link to={`/movie/${movie.id}`}>
       <div style={{ border: "1px solid white", padding: "10px" }}>
