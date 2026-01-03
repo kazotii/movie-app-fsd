@@ -1,31 +1,38 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { createApi } from "@reduxjs/toolkit/query/react";
-import type { Movie, MovieDetails, TmdbResponse } from "../../shared/types";
+import type { Movie, MovieDetails, TmdbResponse, FullMovie, FilterParams } from "../../shared/types";
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
-
-interface FilterParams {
-  genreId: number;
-  year: string | null;
-}
-
-export type FullMovie = Movie & { moviePosterPath: string };
 
 export const movieApi = createApi({
   // base url + url + api_key + primary_release_year + with_genres
   reducerPath: "movieApi",
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+  tagTypes: ["Movies"],
   endpoints: (builder) => ({
     getMovies: builder.query<TmdbResponse<FullMovie>, FilterParams>({
-      query: (filters) => ({
-        url: "discover/movie",
-        params: {
-          api_key: API_KEY,
-          primary_release_year: filters.year || "",
-          with_genres: filters.genreId !== 0 ? filters.genreId : "",
-          language: "en-US",
-        },
-      }),
+      providesTags: ["Movies"],
+      query: (filters) => {
+        const filterUrl = "discover/movie";
+        if (filters.query)
+          return {
+            url: "search/movie",
+            params: {
+              query: filters.query,
+              api_key: API_KEY,
+              language: "en-US",
+            },
+          };
+        return {
+          url: filterUrl,
+          params: {
+            api_key: API_KEY,
+            primary_release_year: filters.year || "",
+            with_genres: filters.genreId !== 0 ? filters.genreId : "",
+            language: "en-US",
+          },
+        };
+      },
       transformResponse: (response: TmdbResponse<Movie>) => {
         return {
           ...response,
@@ -38,7 +45,7 @@ export const movieApi = createApi({
         };
       },
     }),
-    getMoviesDetails: builder.query<MovieDetails & { moviePosterPath: string }, string> ({
+    getMoviesDetails: builder.query<MovieDetails & { moviePosterPath: string },string>({
       query: (id) => ({
         url: `movie/${id}`,
         params: {

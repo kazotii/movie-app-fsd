@@ -9,9 +9,9 @@ export interface Movie {
   poster_path: string;
 }
 
-export interface Genre{
-  id: number,
-  name: string
+export interface Genre {
+  id: number;
+  name: string;
 }
 
 export interface MovieDetails extends Movie {
@@ -19,9 +19,9 @@ export interface MovieDetails extends Movie {
   adult: boolean;
   popularity: number;
   overview: string;
-  runtime: number,
-  vote_average: number,
-  genres: Genre[]
+  runtime: number;
+  vote_average: number;
+  genres: Genre[];
 }
 
 export interface TmdbResponse<T> {
@@ -29,4 +29,12 @@ export interface TmdbResponse<T> {
   results: T[];
   total_pages: number;
   total_results: number;
+}
+
+export type FullMovie = Movie & { moviePosterPath: string };
+
+export interface FilterParams {
+  genreId: number;
+  year: string | null;
+  query: string;
 }

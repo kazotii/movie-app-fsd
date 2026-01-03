@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetMoviesDetailsQuery } from "../app/store/movieApi";
 
 export const MovieDetails = () => {
+  const Maps = useNavigate()
   const { id } = useParams();
   const { data, isLoading, error } = useGetMoviesDetailsQuery(id ?? "", {
     skip: !id,
@@ -12,6 +13,7 @@ export const MovieDetails = () => {
 
   return (
     <>
+    <button className="bg-amber-700 cursor-pointer" onClick={ () => Maps(-1)}>Back</button>
       <div>
         <img src={data?.moviePosterPath} style={{width: "20%"}}/>
       </div>

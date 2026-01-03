@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
-import type { FullMovie } from "../../app/store/movieApi";
+import type { FullMovie } from "../../shared/types";
 
-interface MovieCardProps {
+export interface MovieListItemProps {
   movie: FullMovie;
 }
 
-export const MovieListItem = ({ movie }: MovieCardProps) => {
+export const MovieListItem = ({ movie }: MovieListItemProps) => {
   return (
     <Link to={`/movie/${movie.id}`}>
-      <div style={{ border: "1px solid white", padding: "10px" }}>
+      <div className="hover:scale-105 transition-transform">
         <img
           src={movie.moviePosterPath}
           alt={movie.title}
