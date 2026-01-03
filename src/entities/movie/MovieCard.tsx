@@ -1,18 +1,22 @@
-import type { Movie } from "../../shared/types";
+import { Link } from "react-router-dom";
+import type { FullMovie } from "../../app/store/movieApi";
 
 interface MovieCardProps {
-  movie: Movie;
+  movie: FullMovie;
 }
 
 export const MovieCard = ({ movie }: MovieCardProps) => {
-  const movieImageUrl = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-    : "https://via.placeholder.com/500x750?text=No+Poster";
   return (
-    <div style={{ border: "1px solid white", padding: "10px" }}>
-      <img src={movieImageUrl} alt={movie.title} style={{ width: "100%" }} />
-      <h2>{movie.title}</h2>
-      <p>Release:{movie.release_date}</p>
-    </div>
+    <Link to={`/movie/${movie.id}`}>
+      <div style={{ border: "1px solid white", padding: "10px" }}>
+        <img
+          src={movie.moviePosterPath}
+          alt={movie.title}
+          style={{ width: "100%" }}
+        />
+        <h2>{movie.title}</h2>
+        <p>Release:{movie.release_date}</p>
+      </div>
+    </Link>
   );
 };
