@@ -13,7 +13,7 @@ export const Homepage = () => {
 
   return (
     <>
-    <SearchInput />
+      <SearchInput />
       <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-6 p-4">
         {data?.results?.map((movie: FullMovie) => (
           <MovieListItem key={movie.id} movie={movie} />
