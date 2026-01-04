@@ -1,5 +1,6 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { createApi } from "@reduxjs/toolkit/query/react";
+import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import type {
   Movie,
   MovieDetails,
@@ -11,10 +12,23 @@ import type {
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
+const rawBaseQuery = fetchBaseQuery({ baseUrl: BASE_URL });
+const baseQueryWithPlugins: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args, api, error) => {
+  if(typeof args !== 'string'){
+    args.params = {
+      ...args.params,
+      api_key: API_KEY,
+      language: 'eng-US'
+    }
+  }
+  const result = await rawBaseQuery(args, api, error);
+  return result;
+};
+
 export const movieApi = createApi({
   // base url + url + api_key + primary_release_year + with_genres
   reducerPath: "movieApi",
-  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+  baseQuery: baseQueryWithPlugins,
   tagTypes: ["Movies"],
   endpoints: (builder) => ({
     getMovies: builder.query<TmdbResponse<FullMovie>, FilterParams>({
@@ -26,17 +40,13 @@ export const movieApi = createApi({
             url: "search/movie",
             params: {
               query: filters.query,
-              api_key: API_KEY,
-              language: "en-US",
             },
           };
         return {
           url: filterUrl,
           params: {
-            api_key: API_KEY,
             primary_release_year: filters.year || "",
             with_genres: filters.genreId !== 0 ? filters.genreId : "",
-            language: "en-US",
           },
         };
       },
@@ -53,12 +63,9 @@ export const movieApi = createApi({
       },
     }),
     getMoviesDetails: builder.query<MovieDetails & { moviePosterPath: string }, string>({
+      keepUnusedDataFor: 120,
       query: (id) => ({
         url: `movie/${id}`,
-        params: {
-          api_key: API_KEY,
-          language: "en-US",
-        },
       }),
       transformResponse: (response: MovieDetails) => {
         return {
@@ -69,16 +76,17 @@ export const movieApi = createApi({
         };
       },
     }),
-    getGenres: builder.query<{genres: Genre[]}, string>({
-      query: (language) => ({
+    getGenres: builder.query<{ genres: Genre[] }, string>({
+      keepUnusedDataFor: 300,
+      query: () => ({
         url: `genre/movie/list`,
-        params: {
-          api_key: API_KEY,
-          language: language,
-        },
       }),
     }),
   }),
 });
 
-export const { useGetMoviesQuery, useGetMoviesDetailsQuery, useGetGenresQuery } = movieApi;
+export const {
+  useGetMoviesQuery,
+  useGetMoviesDetailsQuery,
+  useGetGenresQuery,
+} = movieApi;
