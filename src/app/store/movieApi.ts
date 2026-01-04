@@ -1,6 +1,13 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { createApi } from "@reduxjs/toolkit/query/react";
-import type { Movie, MovieDetails, TmdbResponse, FullMovie, FilterParams } from "../../shared/types";
+import type {
+  Movie,
+  MovieDetails,
+  TmdbResponse,
+  FullMovie,
+  FilterParams,
+  Genre,
+} from "../../shared/types";
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -45,7 +52,7 @@ export const movieApi = createApi({
         };
       },
     }),
-    getMoviesDetails: builder.query<MovieDetails & { moviePosterPath: string },string>({
+    getMoviesDetails: builder.query<MovieDetails & { moviePosterPath: string }, string>({
       query: (id) => ({
         url: `movie/${id}`,
         params: {
@@ -62,7 +69,16 @@ export const movieApi = createApi({
         };
       },
     }),
+    getGenres: builder.query<{genres: Genre[]}, string>({
+      query: (language) => ({
+        url: `genre/movie/list`,
+        params: {
+          api_key: API_KEY,
+          language: language,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useGetMoviesQuery, useGetMoviesDetailsQuery } = movieApi;
+export const { useGetMoviesQuery, useGetMoviesDetailsQuery, useGetGenresQuery } = movieApi;
