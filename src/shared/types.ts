@@ -35,6 +35,6 @@ export type FullMovie = Movie & { moviePosterPath: string };
 
 export interface FilterParams {
   genreId: number;
-  year: string | null;
+  year: number | null;
   query: string;
 }
