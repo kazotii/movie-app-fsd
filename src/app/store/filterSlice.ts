@@ -1,11 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const searchParams = new URLSearchParams(window.location.search);
+
+const urlYear = searchParams.get("year");
+const validatedYear =
+  urlYear && !isNaN(Number(urlYear)) ? Number(urlYear) : null;
+
+const urlGenre = searchParams.get("genre");
+const validatedGenre =
+  urlGenre && !isNaN(Number(urlGenre)) ? Number(urlGenre) : 0;
+
+const urlQuery = searchParams.get("query");
+const validatedQuery = urlQuery ? urlQuery : "";
+
 export const filterSlice = createSlice({
   name: "filters",
   initialState: {
-    query: "",
-    year: null,
-    genreId: 0,
+    year: validatedYear,
+    genreId: validatedGenre,
+    query: validatedQuery,
   },
   reducers: {
     setYear: (state, action) => {
