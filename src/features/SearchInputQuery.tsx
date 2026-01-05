@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchQuery } from "../app/store/filterSlice";
-import type { RootState } from "../app/store/store";
+import { setSearchQuery } from "../app/filterSlice";
+import type { RootState } from "../app/store";
 import type React from "react";
 import { useEffect, useState } from "react";
 
@@ -19,6 +19,10 @@ export const SearchInput = () => {
       clearTimeout(TimeoutId);
     };
   }, [dispatch, localValue]);
+
+  useEffect(() => {
+    setLocalValue(query)
+  }, [query])
 
   return (
     <input

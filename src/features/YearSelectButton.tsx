@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setYear } from "../app/store/filterSlice";
-import type { RootState } from "../app/store/store";
-import { useMoviePrefetch } from "../app/store/useMoviePrefetch";
+import { setYear } from "../app/filterSlice";
+import type { RootState } from "../app/store";
+import { useMoviePrefetch } from "../app/useMoviePrefetch";
 
 const currentYear = new Date().getFullYear();
 const years = Array.from(

@@ -4,7 +4,7 @@ import { RouterProvider } from "react-router-dom";
 import { MovieRouter } from "./Router";
 import "./App.css";
 import { Provider } from "react-redux";
-import { store } from "./app/store/store";
+import { store } from "./store";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

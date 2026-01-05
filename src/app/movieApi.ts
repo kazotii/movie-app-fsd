@@ -1,14 +1,8 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import type {
-  Movie,
-  MovieDetails,
-  TmdbResponse,
-  FullMovie,
-  FilterParams,
-  Genre,
-} from "../../shared/types";
+import type { Movie, MovieDetails, TmdbResponse, FullMovie, FilterParams, Genre } from "../shared/types";
+
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
