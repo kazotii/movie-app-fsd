@@ -15,11 +15,11 @@ export const YearSelect = () => {
   const dispatch = useDispatch();
   return (
     <>
-      <select
+      <select className="cursor-pointer"
         value={currentSelectedYear ?? 0}
         onChange={(e) => dispatch(setYear(Number(e.target.value)))}
       >
-        <option value={0}>Choose a year</option>
+        <option className="cursor-pointer" value={0}>Choose a year</option>
         {years.map((year) => (
           <option key={year} value={year}>
             {year}

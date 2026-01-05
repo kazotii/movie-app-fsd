@@ -12,7 +12,7 @@ export const GenreSelect = () => {
 
   return (
     <>
-      <select
+      <select className="cursor-pointer"
         value={currentSelectedGenre ?? ""}
         onChange={(e) => dispatch(setGenre(Number(e.target.value)))}
       >

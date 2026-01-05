@@ -7,7 +7,6 @@ export const MovieDetails = () => {
   const { data, isLoading, error } = useGetMoviesDetailsQuery(id ?? "", {
     skip: !id,
   });
-  console.log(data);
   if (isLoading) return <h1>load, bro</h1>;
   if (error) return <p>error bratik</p>;
 
