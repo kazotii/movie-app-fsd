@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setYear } from "../app/store/filterSlice";
 import type { RootState } from "../app/store/store";
+import { useMoviePrefetch } from "../app/store/useMoviePrefetch";
 
 const currentYear = new Date().getFullYear();
 const years = Array.from(
@@ -13,9 +14,10 @@ export const YearSelect = () => {
     (state: RootState) => state.filters.year
   );
   const dispatch = useDispatch();
+  const prefetch = useMoviePrefetch()
   return (
     <>
-      <select className="cursor-pointer"
+      <select className="cursor-pointer" onMouseEnter={() => {prefetch()}}
         value={currentSelectedYear ?? 0}
         onChange={(e) => dispatch(setYear(Number(e.target.value)))}
       >

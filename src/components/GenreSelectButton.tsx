@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetGenresQuery } from "../app/store/movieApi";
 import { setGenre } from "../app/store/filterSlice";
 import type { RootState } from "../app/store/store";
+import { useMoviePrefetch } from "../app/store/useMoviePrefetch";
 
 export const GenreSelect = () => {
   const { data } = useGetGenresQuery("en-US");
@@ -9,10 +10,14 @@ export const GenreSelect = () => {
     (state: RootState) => state.filters.genreId
   );
   const dispatch = useDispatch();
+  const prefetch = useMoviePrefetch();
 
   return (
     <>
-      <select className="cursor-pointer"
+      <select
+        className="cursor-pointer"
+        onMouseEnter={() => {
+          prefetch()}}
         value={currentSelectedGenre ?? ""}
         onChange={(e) => dispatch(setGenre(Number(e.target.value)))}
       >
