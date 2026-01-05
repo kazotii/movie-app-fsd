@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { FullMovie } from "../../shared/types";
+import type { FullMovie } from "../../../shared/types";
 
 export interface MovieListItemProps {
   movie: FullMovie;
