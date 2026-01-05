@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetMoviesDetailsQuery } from "../app/store/movieApi";
+import { MovieDetailsSkeleton } from "../entities/movie/ui/MovieDetailsSkeleton";
 
 export const MovieDetails = () => {
   const Maps = useNavigate();
@@ -7,14 +8,8 @@ export const MovieDetails = () => {
   const { data, isLoading, error } = useGetMoviesDetailsQuery(id ?? "", {
     skip: !id,
   });
-  if (isLoading) return <h1>load, bro</h1>;
-  if (error) return <p>error bratik</p>;
-
-  return (
+  const mainContent = (
     <>
-      <button className="bg-amber-700 cursor-pointer" onClick={() => Maps(-1)}>
-        Back
-      </button>
       <div>
         <img src={data?.moviePosterPath} style={{ width: "20%" }} />
       </div>
@@ -28,6 +23,16 @@ export const MovieDetails = () => {
       <div>movie vote: {data?.vote_average.toFixed(1)}</div>
       <div>movie title: {data?.title}</div>
       <div>movie overview: {data?.overview}</div>
+    </>
+  );
+  if (error) return <p>error bratik</p>;
+
+  return (
+    <>
+      <button className="bg-amber-700 cursor-pointer" onClick={() => Maps(-1)}>
+        Back
+      </button>
+      {isLoading ? <MovieDetailsSkeleton /> : mainContent}
     </>
   );
 };
