@@ -5,23 +5,18 @@ interface Page {
 }
 
 export const PageButton = ({ currentPage, totalPage, action }: Page) => {
+  const pages = [currentPage - 1, currentPage, currentPage + 1];
+  const filteredPages = pages.filter(
+    (p) => p >= 1 && p <= totalPage && p <= 500
+  );
+
   return (
     <div>
-      <button className="cursor-pointer"
-        disabled={currentPage === 1}
-        onClick={() => action(currentPage - 1)}
-      >
-        Prev
-      </button>
-      <span>
-        {currentPage} - {totalPage}
-      </span>
-      <button className="cursor-pointer"
-        disabled={currentPage === totalPage || currentPage === 500}
-        onClick={() => action(currentPage + 1)}
-      >
-        Next
-      </button>
+      {filteredPages.map((p) => (
+        <button className="cursor-pointer mr-1" key={p} onClick={() => action(p)}>
+          {p}
+        </button>
+      ))}
     </div>
   );
 };

@@ -19,7 +19,7 @@ export const Homepage = () => {
 
   return (
     <>
-      <div className="mb-4">
+      <div className="mb-2">
         <SearchInput />
         <GenreSelect />
         <YearSelect />

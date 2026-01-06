@@ -23,7 +23,10 @@ export const MovieRouter = createBrowserRouter([
         path: "/favorites",
         element: <FavoritePage />,
       },
-      { path: "*", element: <ErrorPage /> },
+      { 
+        path: "*",
+        element: <ErrorPage /> 
+      },
     ],
   },
 ]);
