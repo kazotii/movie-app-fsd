@@ -10,11 +10,14 @@ import { MovieSkeleton } from "../entities/movie/ui/MovieSkeleton";
 import { ResetFilter } from "../features/ResetFilterButton";
 import { PageButton } from "../features/PageButton";
 import { setPage } from "../entities/movie/model/filterSlice";
+import { useCallback } from "react";
 
 export const Homepage = () => {
   const filters = useSelector((state: RootState) => state.filters);
   const { data, isLoading, isFetching, error } = useGetMoviesQuery(filters);
   const dispatch = useDispatch();
+  const handlePageChange = useCallback((number: number) => {
+    dispatch(setPage(number))}, [dispatch]);
   if (error) return <p>Sorry error!{":("}</p>;
 
   return (
@@ -24,17 +27,16 @@ export const Homepage = () => {
         <GenreSelect />
         <YearSelect />
         <ResetFilter />
-        <PageButton 
+        <PageButton
           currentPage={filters.page}
           totalPage={data?.total_pages || 1}
-          action={(number) => dispatch(setPage(number))}
+          action={handlePageChange}
         />
       </div>
       <div
         className={`grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-6 transition-opacity duration-500 
-        ${isFetching && !isLoading 
-        ? "opacity-50" 
-        : "opacity-100"}`}>
+        ${isFetching && !isLoading ? "opacity-50" : "opacity-100"}`}
+      >
         {isLoading
           ? [...Array(10)].map((_, i) => <MovieSkeleton key={i} />)
           : data?.results?.map((movie: FullMovie) => (

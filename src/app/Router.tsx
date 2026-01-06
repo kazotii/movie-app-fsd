@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Homepage } from "../pages/MovieHomePage";
-import { MovieDetails } from "../pages/MovieDetailsPage";
+import { Homepage } from "../pages/HomePage";
+import { MovieDetails } from "../pages/MoviePage";
 import { Layout } from "./Layout";
 import ErrorPage from "../pages/ErrorPage";
 import { FavoritePage } from "../pages/FavoritePage";

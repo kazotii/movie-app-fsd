@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSearchQuery } from "../entities/movie/model/filterSlice";
 import type { RootState } from "../app/store/store";
 import type React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export const SearchInput = () => {
   const query = useSelector((state: RootState) => state.filters.query);
@@ -21,11 +21,17 @@ export const SearchInput = () => {
   }, [dispatch, localValue]);
 
   useEffect(() => {
-    setLocalValue(query)
-  }, [query])
+    setLocalValue(query);
+  }, [query]);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   return (
     <input
+      ref={inputRef}
       type="text"
       value={localValue}
       onChange={handleInputChange}
