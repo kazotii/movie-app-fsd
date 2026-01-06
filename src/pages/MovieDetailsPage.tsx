@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetMoviesDetailsQuery } from "../shared/api/movieApi";
 import { MovieDetailsSkeleton } from "../entities/movie/ui/MovieDetailsSkeleton";
+import { FavoriteButton } from "../features/FavoriteButton";
 
 export const MovieDetails = () => {
   const Maps = useNavigate();
@@ -13,6 +14,7 @@ export const MovieDetails = () => {
       <div>
         <img src={data?.moviePosterPath} style={{ width: "20%" }} />
       </div>
+      <FavoriteButton movie={data!} />
       <div>movie runtime: {data?.runtime} min</div>
       <div>
         movie genre:{" "}

@@ -3,6 +3,7 @@ import { Homepage } from "../pages/MovieHomePage";
 import { MovieDetails } from "../pages/MovieDetailsPage";
 import { Layout } from "./Layout";
 import ErrorPage from "../pages/ErrorPage";
+import { FavoritePage } from "../pages/FavoritePage";
 
 export const MovieRouter = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ export const MovieRouter = createBrowserRouter([
       {
         path: "/movie/:id",
         element: <MovieDetails />,
+      },
+      {
+        path: "/favorites",
+        element: <FavoritePage />,
       },
       { path: "*", element: <ErrorPage /> },
     ],
