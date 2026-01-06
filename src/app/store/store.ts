@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import filterReducer from "../../entities/movie/model/filterSlice";
 import { movieApi } from "../../shared/api/movieApi";
 import type { Middleware } from "@reduxjs/toolkit";
+import favoritesReducer from "../../entities/movie/model/favoritesSlice"
 
 const urlSyncMiddleware: Middleware = (store) => (next) => (action) => {
   const result = next(action);
@@ -25,7 +26,10 @@ const urlSyncMiddleware: Middleware = (store) => (next) => (action) => {
 };
 
 export const store = configureStore({
-  reducer: { filters: filterReducer, [movieApi.reducerPath]: movieApi.reducer },
+  reducer: {
+    filters: filterReducer,
+    favorites: favoritesReducer,
+    [movieApi.reducerPath]: movieApi.reducer },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(movieApi.middleware, urlSyncMiddleware),
 });
