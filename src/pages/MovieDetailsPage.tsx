@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetMoviesDetailsQuery } from "../app/movieApi";
+import { useGetMoviesDetailsQuery } from "../shared/api/movieApi";
 import { MovieDetailsSkeleton } from "../entities/movie/ui/MovieDetailsSkeleton";
 
 export const MovieDetails = () => {

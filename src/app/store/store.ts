@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import filterReducer from "./filterSlice";
-import { movieApi } from "./movieApi";
+import filterReducer from "../../entities/movie/model/filterSlice";
+import { movieApi } from "../../shared/api/movieApi";
 import type { Middleware } from "@reduxjs/toolkit";
 
 const urlSyncMiddleware: Middleware = (store) => (next) => (action) => {

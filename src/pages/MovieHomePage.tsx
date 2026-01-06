@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import { useGetMoviesQuery } from "../app/movieApi";
+import { useGetMoviesQuery } from "../shared/api/movieApi";
 import type { FullMovie } from "../shared/types";
-import type { RootState } from "../app/store";
+import type { RootState } from "../app/store/store";
 import { MovieListItem } from "../entities/movie/ui/MovieListItem";
 import { SearchInput } from "../features/SearchInputQuery";
 import { GenreSelect } from "../features/GenreSelectButton";

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useGetGenresQuery } from "../app/movieApi";
-import { setGenre } from "../app/filterSlice";
-import type { RootState } from "../app/store";
-import { useMoviePrefetch } from "../app/useMoviePrefetch";
+import { useGetGenresQuery } from "../shared/api/movieApi";
+import { setGenre } from "../entities/movie/model/filterSlice";
+import type { RootState } from "../app/store/store";
+import { useMoviePrefetch } from "../entities/movie/model/useMoviePrefetch";
 
 export const GenreSelect = () => {
   const { data } = useGetGenresQuery("en-US");

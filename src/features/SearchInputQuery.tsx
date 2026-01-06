@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchQuery } from "../app/filterSlice";
-import type { RootState } from "../app/store";
+import { setSearchQuery } from "../entities/movie/model/filterSlice";
+import type { RootState } from "../app/store/store";
 import type React from "react";
 import { useEffect, useState } from "react";
 

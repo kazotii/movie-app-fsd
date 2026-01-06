@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { resetFilters } from "../app/filterSlice";
+import { resetFilters } from "../entities/movie/model/filterSlice";
 
 export const ResetFilter = () => {
   const dispatch = useDispatch();
