@@ -19,6 +19,9 @@ const urlSyncMiddleware: Middleware = (store) => (next) => (action) => {
     if(currentFilters.query){
       params.set('query', currentFilters.query)
     }
+    if(currentFilters.page){
+      params.set('page', currentFilters.page.toString())
+    }
     window.history.replaceState({}, '', `?${params.toString()}`)
   }
 

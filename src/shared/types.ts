@@ -37,4 +37,5 @@ export interface FilterParams {
   genreId: number;
   year: number | null;
   query: string;
+  page: number
 }

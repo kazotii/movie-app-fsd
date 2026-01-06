@@ -17,7 +17,8 @@ export const GenreSelect = () => {
       <select
         className="cursor-pointer"
         onMouseEnter={() => {
-          prefetch()}}
+          prefetch();
+        }}
         value={currentSelectedGenre ?? ""}
         onChange={(e) => dispatch(setGenre(Number(e.target.value)))}
       >

@@ -33,12 +33,14 @@ export const movieApi = createApi({
           return {
             url: "search/movie",
             params: {
+              page: filters.page,
               query: filters.query,
             },
           };
         return {
           url: filterUrl,
           params: {
+            page: filters.page,
             primary_release_year: filters.year || "",
             with_genres: filters.genreId !== 0 ? filters.genreId : "",
           },
