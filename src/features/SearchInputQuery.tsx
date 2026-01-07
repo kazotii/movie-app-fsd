@@ -31,6 +31,7 @@ export const SearchInput = () => {
 
   return (
     <input
+    className=" px-2 transition-all rounded-lg focus: border-white"
       ref={inputRef}
       type="text"
       value={localValue}

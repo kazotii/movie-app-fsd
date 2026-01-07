@@ -15,7 +15,7 @@ export const PageButton = memo(({ currentPage, totalPage, action }: Page) => {
   return (
     <div>
       {filteredPages.map((p) => (
-        <button className="cursor-pointer mr-1" key={p} onClick={() => action(p)}>
+        <button className="cursor-pointer ml-1.5 bg-gray-900 text-white" key={p} onClick={() => action(p)}>
           {p}
         </button>
       ))}

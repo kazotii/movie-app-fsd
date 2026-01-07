@@ -17,7 +17,7 @@ export const YearSelect = () => {
   const prefetch = useMoviePrefetch()
   return (
     <>
-      <select className="cursor-pointer" onMouseEnter={() => {prefetch()}}
+      <select className="cursor-pointer bg-gray-900 text-white" onMouseEnter={() => {prefetch()}}
         value={currentSelectedYear ?? 0}
         onChange={(e) => dispatch(setYear(Number(e.target.value)))}
       >

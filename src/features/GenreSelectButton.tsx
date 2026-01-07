@@ -15,7 +15,7 @@ export const GenreSelect = () => {
   return (
     <>
       <select
-        className="cursor-pointer"
+        className="cursor-pointer bg-gray-900 text-white"
         onMouseEnter={() => {
           prefetch();
         }}

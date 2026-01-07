@@ -3,7 +3,6 @@ import { useGetMoviesQuery } from "../shared/api/movieApi";
 import type { FullMovie } from "../shared/types";
 import type { RootState } from "../app/store/store";
 import { MovieListItem } from "../entities/movie/ui/MovieListItem";
-import { SearchInput } from "../features/SearchInputQuery";
 import { GenreSelect } from "../features/GenreSelectButton";
 import { YearSelect } from "../features/YearSelectButton";
 import { MovieSkeleton } from "../entities/movie/ui/MovieSkeleton";
@@ -22,8 +21,7 @@ export const Homepage = () => {
 
   return (
     <>
-      <div className="mb-2">
-        <SearchInput />
+      <div className="flex gap-100 mb-10 ml-2 mt-2">
         <GenreSelect />
         <YearSelect />
         <ResetFilter />
@@ -34,7 +32,7 @@ export const Homepage = () => {
         />
       </div>
       <div
-        className={`grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-6 transition-opacity duration-500 
+        className={`grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-6 transition-opacity duration-500 m-3
         ${isFetching && !isLoading ? "opacity-50" : "opacity-100"}`}
       >
         {isLoading
