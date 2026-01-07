@@ -3,6 +3,7 @@ import type { RootState } from "../app/store/store";
 import { MovieListItem } from "../entities/movie/ui/MovieListItem";
 import { useNavigate } from "react-router-dom";
 import { ErrorItem } from "../shared/ui/error/ErrorItem";
+import { Frown } from "lucide-react";
 
 export const FavoritePage = () => {
   const Maps = useNavigate();
@@ -13,6 +14,7 @@ export const FavoritePage = () => {
         title="Still empty :("
         description="Add movies to favorite to see them here!"
         buttonText="Go to movies!"
+        Icon={Frown}
         action={() => Maps("/")}
       />
     );

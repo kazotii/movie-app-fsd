@@ -11,6 +11,7 @@ import { PageButton } from "../features/PageButton";
 import { setPage, setSearchQuery } from "../entities/movie/model/filterSlice";
 import { useCallback } from "react";
 import { ErrorItem } from "../shared/ui/error/ErrorItem";
+import { SearchX, AlertCircle } from "lucide-react";
 
 
 export const Homepage = () => {
@@ -25,6 +26,7 @@ export const Homepage = () => {
       title="Oops! Might be server error"
       description="Cannot load your movies. Checkout your connection"
       buttonText="Try again"
+      Icon={AlertCircle}
       action={() => refetch()}
     />
   );}
@@ -34,6 +36,7 @@ export const Homepage = () => {
       title="Oops! No movie was found!"
       description="Cannot find your movie. Checkout others!"
       buttonText="Check other movies!"
+      Icon={SearchX}
       action={() => dispatch(setSearchQuery(""))}
       />
     )
