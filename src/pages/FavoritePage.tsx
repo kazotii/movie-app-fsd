@@ -2,10 +2,21 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../app/store/store";
 import { MovieListItem } from "../entities/movie/ui/MovieListItem";
 import { useNavigate } from "react-router-dom";
+import { ErrorItem } from "../shared/ui/error/ErrorItem";
 
 export const FavoritePage = () => {
   const Maps = useNavigate();
   const movies = useSelector((state: RootState) => state.favorites.items);
+  if(movies.length === 0){
+    return (
+      <ErrorItem
+        title="Still empty :("
+        description="Add movies to favorite to see them here!"
+        buttonText="Go to movies!"
+        action={() => Maps("/")}
+      />
+    );
+  }
   return (
     <>
       <button className="bg-amber-700 cursor-pointer" onClick={() => Maps(-1)}>

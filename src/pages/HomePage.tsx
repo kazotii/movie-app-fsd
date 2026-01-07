@@ -8,16 +8,36 @@ import { YearSelect } from "../features/YearSelectButton";
 import { MovieSkeleton } from "../entities/movie/ui/MovieSkeleton";
 import { ResetFilter } from "../features/ResetFilterButton";
 import { PageButton } from "../features/PageButton";
-import { setPage } from "../entities/movie/model/filterSlice";
+import { setPage, setSearchQuery } from "../entities/movie/model/filterSlice";
 import { useCallback } from "react";
+import { ErrorItem } from "../shared/ui/error/ErrorItem";
+
 
 export const Homepage = () => {
   const filters = useSelector((state: RootState) => state.filters);
-  const { data, isLoading, isFetching, error } = useGetMoviesQuery(filters);
+  const { data, isLoading, isFetching, error, refetch } = useGetMoviesQuery(filters);
   const dispatch = useDispatch();
   const handlePageChange = useCallback((number: number) => {
     dispatch(setPage(number))}, [dispatch]);
-  if (error) return <p>Sorry error!{":("}</p>;
+  if(error){
+  return (
+    <ErrorItem 
+      title="Oops! Might be server error"
+      description="Cannot load your movies. Checkout your connection"
+      buttonText="Try again"
+      action={() => refetch()}
+    />
+  );}
+  if(!isLoading && data?.results.length === 0){
+    return(
+      <ErrorItem 
+      title="Oops! No movie was found!"
+      description="Cannot find your movie. Checkout others!"
+      buttonText="Check other movies!"
+      action={() => dispatch(setSearchQuery(""))}
+      />
+    )
+  }
 
   return (
     <>
