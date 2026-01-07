@@ -3,7 +3,7 @@ import { useGetMoviesDetailsQuery } from "../shared/api/movieApi";
 import { MovieDetailsSkeleton } from "../entities/movie/ui/MovieDetailsSkeleton";
 import { FavoriteButton } from "../features/FavoriteButton";
 
-export const MovieDetails = () => {
+export const MoviePage = () => {
   const Maps = useNavigate();
   const { id } = useParams();
   const { data, isLoading, error } = useGetMoviesDetailsQuery(id ?? "", {

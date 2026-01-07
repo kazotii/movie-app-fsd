@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Homepage } from "../pages/HomePage";
-import { MovieDetails } from "../pages/MoviePage";
+import { MoviePage } from "../pages/MoviePage";
 import { Layout } from "./Layout";
 import { FavoritePage } from "../pages/FavoritePage";
 
@@ -15,7 +15,7 @@ export const MovieRouter = createBrowserRouter([
       },
       {
         path: "/movie/:id",
-        element: <MovieDetails />,
+        element: <MoviePage />,
       },
       {
         path: "/favorites",
