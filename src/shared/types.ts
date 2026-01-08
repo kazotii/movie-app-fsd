@@ -22,6 +22,12 @@ export interface MovieDetails extends Movie {
   runtime: number;
   vote_average: number;
   genres: Genre[];
+  tagline: string;
+  production_countries: { name: string }[];
+  credits?: {
+    cast: { id: number; name: string; character: string }[];
+    crew: { id: number; name: string; job: string }[];
+  };
 }
 
 export interface TmdbResponse<T> {

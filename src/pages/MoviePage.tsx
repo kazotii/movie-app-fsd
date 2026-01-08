@@ -6,6 +6,7 @@ import { useGetMovieVideosQuery } from "../shared/api/movieApi";
 import { TrailerButton } from "../features/TrailerButton";
 import { MovieTrailer } from "../entities/movie/ui/MovieTrailer";
 import { useState } from "react";
+import { ArrowBigLeft } from "lucide-react";
 
 export const MoviePage = () => {
   const Maps = useNavigate();
@@ -15,38 +16,70 @@ export const MoviePage = () => {
   });
   const { data: videoKey } = useGetMovieVideosQuery(id ?? "");
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
+
+  const director = data?.credits?.crew.find(
+    (person) => person.job === "Director"
+  )?.name;
+  const actors = data?.credits?.cast
+    .slice(0, 5)
+    .map((actor) => actor.name)
+    .join(", ");
+  const genre = data?.genres.map((genre) => (
+    <span key={genre.id}>{genre.name + ", "}</span>
+  ));
+  const vote = data?.vote_average.toFixed(1);
+  const country = data?.production_countries?.[0]?.name;
   if (error) return <p>error bratik</p>;
 
   return (
     <>
-      <button className="bg-amber-700 cursor-pointer" onClick={() => Maps(-1)}>
-        Back
-      </button>
       {isLoading ? (
         <MovieDetailsSkeleton />
       ) : (
-        <>
+        <div className="flex gap-10 flex-col md:flex-row max-w-7xl p-4">
           <div>
-            <img src={data?.moviePosterPath} style={{ width: "20%" }} />
+            <div>
+              <h1>{data?.title}</h1>
+              <img src={data?.moviePosterPath} />
+            </div>
+            <FavoriteButton movie={data!} />
+            <TrailerButton onClick={() => setIsTrailerOpen(true)} />
           </div>
-          <FavoriteButton movie={data!} />
-          <TrailerButton onClick={() => setIsTrailerOpen(true)} />
-          <div>movie runtime: {data?.runtime} min</div>
           <div>
-            movie genre:{" "}
-            {data?.genres.map((genre) => (
-              <span key={genre.id}>{genre.name + " "}</span>
-            ))}
+            <div className="flex flex-col gap-5">
+              <span>Vote: {vote}</span>
+              {data?.tagline && (
+                <span>
+                  <span className="text-slate-500">Tagline:</span> «
+                  {data.tagline}»
+                </span>
+              )}
+              <span>Country: {country}</span>
+              {director && (
+                <p>
+                  <span>Director: </span>
+                  {director}
+                </p>
+              )}
+              <span>Release date: {data?.release_date}</span>
+              <span>Genre: {genre}</span>
+              <span>Runtime: {data?.runtime} min</span>
+              <span>Title: {data?.title}</span>
+              {actors && (
+                <p>
+                  <span>Cast: </span>
+                  {actors}
+                </p>
+              )}
+              <span>Overview: {data?.overview}</span>
+            </div>
           </div>
-          <div>movie vote: {data?.vote_average.toFixed(1)}</div>
-          <div>movie title: {data?.title}</div>
-          <div>movie overview: {data?.overview}</div>
           <MovieTrailer
             isOpen={isTrailerOpen}
             Close={() => setIsTrailerOpen(false)}
             videoKey={videoKey}
           />
-        </>
+        </div>
       )}
     </>
   );

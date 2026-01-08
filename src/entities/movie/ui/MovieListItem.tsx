@@ -11,7 +11,7 @@ export interface MovieListItemProps {
 }
 
 export const MovieListItem = ({ movie }: MovieListItemProps) => {
-  const {data : videoKey} = useGetMovieVideosQuery(movie.id.toString())
+  const { data: videoKey } = useGetMovieVideosQuery(movie.id.toString());
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
   return (
     <div>
@@ -24,11 +24,15 @@ export const MovieListItem = ({ movie }: MovieListItemProps) => {
           />
         </div>
       </Link>
-      <div className="flex flex-col mt-2 ">
-        <h2>{movie.title}</h2>
-        <p>Release:{movie.release_date}</p>
-        <FavoriteButton movie={movie} />
-        <TrailerButton onClick={() => setIsTrailerOpen(true)} />
+      <div className="flex justify-between mt-2">
+        <div>
+          <h1>{movie.title}</h1>
+          <p>{movie.release_date.slice(0, 4)}</p>
+        </div>
+        <div>
+          <FavoriteButton movie={movie} />
+          <TrailerButton onClick={() => setIsTrailerOpen(true)} />
+        </div>
         <MovieTrailer
           isOpen={isTrailerOpen}
           Close={() => setIsTrailerOpen(false)}

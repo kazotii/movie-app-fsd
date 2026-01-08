@@ -78,6 +78,9 @@ export const movieApi = createApi({
       keepUnusedDataFor: 120,
       query: (id) => ({
         url: `movie/${id}`,
+        params: {
+          append_to_response: "credits",
+        },
       }),
       transformResponse: (response: MovieDetails) => {
         return {
@@ -112,5 +115,5 @@ export const {
   useGetMoviesQuery,
   useGetMoviesDetailsQuery,
   useGetGenresQuery,
-  useGetMovieVideosQuery
+  useGetMovieVideosQuery,
 } = movieApi;
