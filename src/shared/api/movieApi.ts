@@ -1,19 +1,35 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { createApi } from "@reduxjs/toolkit/query/react";
-import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import type { Movie, MovieDetails, TmdbResponse, FullMovie, FilterParams, Genre } from "../types";
+import type {
+  BaseQueryFn,
+  FetchArgs,
+  FetchBaseQueryError,
+} from "@reduxjs/toolkit/query";
+import type {
+  Movie,
+  MovieDetails,
+  TmdbResponse,
+  FullMovie,
+  FilterParams,
+  Genre,
+  TmdbTrailerVideo,
+} from "../types";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const rawBaseQuery = fetchBaseQuery({ baseUrl: BASE_URL });
-const baseQueryWithPlugins: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args, api, error) => {
-  if(typeof args !== 'string'){
+const baseQueryWithPlugins: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, error) => {
+  if (typeof args !== "string") {
     args.params = {
       ...args.params,
       api_key: API_KEY,
-      language: 'eng-US'
-    }
+      language: "eng-US",
+    };
   }
   const result = await rawBaseQuery(args, api, error);
   return result;
@@ -78,6 +94,17 @@ export const movieApi = createApi({
         url: `genre/movie/list`,
       }),
     }),
+    getMovieVideos: builder.query<string, string>({
+      query: (id) => ({
+        url: `movie/${id}/videos`,
+      }),
+      transformResponse: (response: TmdbResponse<TmdbTrailerVideo>) => {
+        const trailer = response.results.find(
+          (video) => video.type === "Trailer" && video.site === "YouTube"
+        );
+        return trailer ? trailer.key : "";
+      },
+    }),
   }),
 });
 
@@ -85,4 +112,5 @@ export const {
   useGetMoviesQuery,
   useGetMoviesDetailsQuery,
   useGetGenresQuery,
+  useGetMovieVideosQuery
 } = movieApi;

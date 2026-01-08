@@ -37,5 +37,11 @@ export interface FilterParams {
   genreId: number;
   year: number | null;
   query: string;
-  page: number
+  page: number;
+}
+
+export interface TmdbTrailerVideo {
+  key: string;
+  type: string;
+  site: string;
 }

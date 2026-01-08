@@ -4,12 +4,14 @@ import { FavoriteButton } from "../../../features/FavoriteButton";
 import { TrailerButton } from "../../../features/TrailerButton";
 import { useState } from "react";
 import { MovieTrailer } from "./MovieTrailer";
+import { useGetMovieVideosQuery } from "../../../shared/api/movieApi";
 
 export interface MovieListItemProps {
   movie: FullMovie;
 }
 
 export const MovieListItem = ({ movie }: MovieListItemProps) => {
+  const {data : videoKey} = useGetMovieVideosQuery(movie.id.toString())
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
   return (
     <div>
@@ -30,6 +32,7 @@ export const MovieListItem = ({ movie }: MovieListItemProps) => {
         <MovieTrailer
           isOpen={isTrailerOpen}
           Close={() => setIsTrailerOpen(false)}
+          videoKey={videoKey}
         />
       </div>
     </div>

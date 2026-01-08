@@ -44,7 +44,7 @@ export const Homepage = () => {
 
   return (
     <>
-      <div className="flex gap-100 mb-10 ml-2 mt-2">
+      <div className="flex mb-10 ml-2 mt-2">
         <GenreSelect />
         <YearSelect />
         <ResetFilter />
@@ -55,7 +55,7 @@ export const Homepage = () => {
         />
       </div>
       <div
-        className={`grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-6 transition-opacity duration-500 m-3
+        className={`grid grid-cols-1 lg:grid-cols-5 gap-6 transition-opacity duration-500 m-3
         ${isFetching && !isLoading ? "opacity-50" : "opacity-100"}`}
       >
         {isLoading
