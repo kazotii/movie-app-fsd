@@ -20,7 +20,6 @@ export const MovieListItem = ({ movie }: MovieListItemProps) => {
           <img
             src={movie.moviePosterPath}
             alt={movie.title}
-            style={{ width: "100%" }}
           />
         </div>
       </Link>
@@ -29,7 +28,7 @@ export const MovieListItem = ({ movie }: MovieListItemProps) => {
           <h1>{movie.title}</h1>
           <p>{movie.release_date.slice(0, 4)}</p>
         </div>
-        <div>
+        <div className="flex justify-between">
           <FavoriteButton movie={movie} />
           <TrailerButton onClick={() => setIsTrailerOpen(true)} />
         </div>

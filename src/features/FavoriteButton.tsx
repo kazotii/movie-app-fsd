@@ -13,7 +13,7 @@ export const FavoriteButton = ({ movie }: { movie: FullMovie }) => {
   };
   return (
     <button onClick={favoriteToggle} className="cursor-pointer">
-      <Star className={isFavorite ? "fill-amber-300" : "fill-none"}/>
+      <Star size={30} className={isFavorite ? "fill-amber-300" : "fill-none"}/>
     </button>
   );
 };

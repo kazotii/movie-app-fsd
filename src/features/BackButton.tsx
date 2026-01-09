@@ -9,7 +9,7 @@ export const BackButton = () => {
         onClick={() => navigate(-1)}
       >
         <ArrowBigLeft
-          size={20}
+          size={30}
         />
       </button>
   );

@@ -49,7 +49,7 @@ export const Homepage = () => {
 
   return (
     <>
-      <div className="flex mb-10 ml-2 mt-2">
+      <div className="flex px-4">
         <GenreSelect />
         <YearSelect />
         <ResetFilter />

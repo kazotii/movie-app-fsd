@@ -6,10 +6,10 @@ import { setSearchQuery } from "../entities/movie/model/filterSlice";
 export const Header = () => {
   const dispatch = useDispatch();
   return (
-    <nav className="flex justify-between p-4 bg-gray-900 text-white">
-      <div>
+    <nav className="flex flex-col gap-4 p-4 text-white">
+      <div className="flex w-full justify-between items-center">
         <h1 className="font-bold">MOVIE APP</h1>
-        <div>
+        <div className="flex gap-4">
           <NavLink
             to="/"
             onClick={() => dispatch(setSearchQuery(""))}
@@ -33,8 +33,7 @@ export const Header = () => {
           </NavLink>
         </div>
       </div>
-
-      <div>
+      <div className="w-full mt-2 md:max-w-md">
         <SearchInput />
       </div>
     </nav>

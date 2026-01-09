@@ -52,10 +52,9 @@ export const MoviePage = () => {
         <MovieDetailsSkeleton />
       ) : (
         <div className="flex gap-10 flex-col md:flex-row max-w-7xl p-4">
-          <div>
-            <div>
-              <BackButton/>
-              <h1>{data?.title}</h1>
+          <div className="ml-20">
+            <div className="w-full md:w-80 shrink-0">
+              <BackButton />
               <img src={data?.moviePosterPath} />
             </div>
             <div>
@@ -64,7 +63,8 @@ export const MoviePage = () => {
             </div>
           </div>
           <div>
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5 mt-15">
+              <h1 className="font-bold">{data?.title}</h1>
               <InfoRow label="Vote" value={vote} />
               <InfoRow
                 label="Tagline"
