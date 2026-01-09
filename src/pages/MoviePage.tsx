@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetMoviesDetailsQuery } from "../shared/api/movieApi";
 import { MovieDetailsSkeleton } from "../entities/movie/ui/MoviePageSkeleton";
 import { FavoriteButton } from "../features/FavoriteButton";
@@ -6,10 +6,25 @@ import { useGetMovieVideosQuery } from "../shared/api/movieApi";
 import { TrailerButton } from "../features/TrailerButton";
 import { MovieTrailer } from "../entities/movie/ui/MovieTrailer";
 import { useState } from "react";
-import { ArrowBigLeft } from "lucide-react";
+import { BackButton } from "../features/BackButton";
+
+const InfoRow = ({
+  label,
+  value,
+}: {
+  label: string;
+  value?: string | number | React.ReactNode;
+}) => {
+  if (!value) return null;
+  return (
+    <p className="flex gap-2">
+      <span className="text-slate-500 min-w-25">{label}:</span>
+      <span className="text-slate-200">{value}</span>
+    </p>
+  );
+};
 
 export const MoviePage = () => {
-  const Maps = useNavigate();
   const { id } = useParams();
   const { data, isLoading, error } = useGetMoviesDetailsQuery(id ?? "", {
     skip: !id,
@@ -39,39 +54,53 @@ export const MoviePage = () => {
         <div className="flex gap-10 flex-col md:flex-row max-w-7xl p-4">
           <div>
             <div>
+              <BackButton/>
               <h1>{data?.title}</h1>
               <img src={data?.moviePosterPath} />
             </div>
-            <FavoriteButton movie={data!} />
-            <TrailerButton onClick={() => setIsTrailerOpen(true)} />
+            <div>
+              <FavoriteButton movie={data!} />
+              <TrailerButton onClick={() => setIsTrailerOpen(true)} />
+            </div>
           </div>
           <div>
             <div className="flex flex-col gap-5">
-              <span>Vote: {vote}</span>
-              {data?.tagline && (
-                <span>
-                  <span className="text-slate-500">Tagline:</span> «
-                  {data.tagline}»
-                </span>
-              )}
-              <span>Country: {country}</span>
-              {director && (
-                <p>
-                  <span>Director: </span>
-                  {director}
-                </p>
-              )}
-              <span>Release date: {data?.release_date}</span>
-              <span>Genre: {genre}</span>
-              <span>Runtime: {data?.runtime} min</span>
-              <span>Title: {data?.title}</span>
-              {actors && (
-                <p>
-                  <span>Cast: </span>
-                  {actors}
-                </p>
-              )}
-              <span>Overview: {data?.overview}</span>
+              <InfoRow label="Vote" value={vote} />
+              <InfoRow
+                label="Tagline"
+                value={data?.tagline ? `«${data.tagline}»` : null}
+              />
+              <InfoRow label="Country" value={country} />
+              <InfoRow
+                label="Director"
+                value={
+                  director && (
+                    <p>
+                      <span>Director: </span>
+                      {director}
+                    </p>
+                  )
+                }
+              />
+              <InfoRow label="Release date" value={data?.release_date} />
+              <InfoRow label="Genre" value={genre} />
+              <InfoRow
+                label="Runtime"
+                value={data?.runtime ? `${data.runtime} min` : null}
+              />
+              <InfoRow label="Title" value={data?.title} />
+              <InfoRow
+                label="Cast"
+                value={
+                  actors && (
+                    <p>
+                      <span>Cast: </span>
+                      {actors}
+                    </p>
+                  )
+                }
+              />
+              <InfoRow label="Overview:" value={data?.overview} />
             </div>
           </div>
           <MovieTrailer

@@ -13,33 +13,38 @@ import { useCallback } from "react";
 import { ErrorItem } from "../shared/ui/error/ErrorItem";
 import { SearchX, AlertCircle } from "lucide-react";
 
-
 export const Homepage = () => {
   const filters = useSelector((state: RootState) => state.filters);
-  const { data, isLoading, isFetching, error, refetch } = useGetMoviesQuery(filters);
+  const { data, isLoading, isFetching, error, refetch } =
+    useGetMoviesQuery(filters);
   const dispatch = useDispatch();
-  const handlePageChange = useCallback((number: number) => {
-    dispatch(setPage(number))}, [dispatch]);
-  if(error){
-  return (
-    <ErrorItem 
-      title="Oops! Might be server error"
-      description="Cannot load your movies. Checkout your connection"
-      buttonText="Try again"
-      Icon={AlertCircle}
-      action={() => refetch()}
-    />
-  );}
-  if(!isLoading && data?.results.length === 0){
-    return(
-      <ErrorItem 
-      title="Oops! No movie was found!"
-      description="Cannot find your movie. Checkout others!"
-      buttonText="Check other movies!"
-      Icon={SearchX}
-      action={() => dispatch(setSearchQuery(""))}
+  const handlePageChange = useCallback(
+    (number: number) => {
+      dispatch(setPage(number));
+    },
+    [dispatch]
+  );
+  if (error) {
+    return (
+      <ErrorItem
+        title="Oops! Might be server error"
+        description="Cannot load your movies. Checkout your connection"
+        buttonText="Try again"
+        Icon={AlertCircle}
+        action={() => refetch()}
       />
-    )
+    );
+  }
+  if (!isLoading && data?.results.length === 0) {
+    return (
+      <ErrorItem
+        title="Oops! No movie was found!"
+        description="Cannot find your movie. Checkout others!"
+        buttonText="Check other movies!"
+        Icon={SearchX}
+        action={() => dispatch(setSearchQuery(""))}
+      />
+    );
   }
 
   return (
@@ -48,11 +53,6 @@ export const Homepage = () => {
         <GenreSelect />
         <YearSelect />
         <ResetFilter />
-        <PageButton
-          currentPage={filters.page}
-          totalPage={data?.total_pages || 1}
-          action={handlePageChange}
-        />
       </div>
       <div
         className={`grid grid-cols-1 lg:grid-cols-5 gap-6 transition-opacity duration-500 m-3
@@ -63,6 +63,11 @@ export const Homepage = () => {
           : data?.results?.map((movie: FullMovie) => (
               <MovieListItem key={movie.id} movie={movie} />
             ))}
+        <PageButton
+          currentPage={filters.page}
+          totalPage={data?.total_pages || 1}
+          action={handlePageChange}
+        />
       </div>
     </>
   );

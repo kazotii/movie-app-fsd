@@ -3,7 +3,8 @@ import type { RootState } from "../app/store/store";
 import { MovieListItem } from "../entities/movie/ui/MovieListItem";
 import { useNavigate } from "react-router-dom";
 import { ErrorItem } from "../shared/ui/error/ErrorItem";
-import { Frown, ArrowBigLeft } from "lucide-react";
+import { Frown } from "lucide-react";
+import { BackButton } from "../features/BackButton";
 
 export const FavoritePage = () => {
   const Maps = useNavigate();
@@ -21,15 +22,7 @@ export const FavoritePage = () => {
   }
   return (
     <>
-      <button
-        className="cursor-pointer flex items-center gap-2 mb-6 px-4 bg-slate-800 hover:bg-amber-700 text-white rounded-lg transition-all duration-300 shadow-md group"
-        onClick={() => Maps(-1)}
-      >
-        <ArrowBigLeft
-          size={20}
-          className="group-hover:-translate-x-1 transition-transform"
-        />
-      </button>
+      <BackButton />
       <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-6 transition-opacity duration-500">
         {movies.length === 0 ? (
           <span>No favorites</span>
