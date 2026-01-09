@@ -52,19 +52,19 @@ export const MoviePage = () => {
         <MovieDetailsSkeleton />
       ) : (
         <div className="flex gap-10 flex-col md:flex-row max-w-7xl p-4">
-          <div className="ml-20">
-            <div className="w-full md:w-80 shrink-0">
+          <div>
+            <div className="w-full md:w-80">
               <BackButton />
               <img src={data?.moviePosterPath} />
             </div>
-            <div>
+            <div className="mt-3">
               <FavoriteButton movie={data!} />
               <TrailerButton onClick={() => setIsTrailerOpen(true)} />
             </div>
           </div>
           <div>
-            <div className="flex flex-col gap-5 mt-15">
-              <h1 className="font-bold">{data?.title}</h1>
+            <div className="flex flex-col gap-5 md:mt-6">
+              <h1 className="font-bold text-xl">{data?.title}</h1>
               <InfoRow label="Vote" value={vote} />
               <InfoRow
                 label="Tagline"
@@ -73,14 +73,7 @@ export const MoviePage = () => {
               <InfoRow label="Country" value={country} />
               <InfoRow
                 label="Director"
-                value={
-                  director && (
-                    <p>
-                      <span>Director: </span>
-                      {director}
-                    </p>
-                  )
-                }
+                value={director}
               />
               <InfoRow label="Release date" value={data?.release_date} />
               <InfoRow label="Genre" value={genre} />
@@ -88,19 +81,11 @@ export const MoviePage = () => {
                 label="Runtime"
                 value={data?.runtime ? `${data.runtime} min` : null}
               />
-              <InfoRow label="Title" value={data?.title} />
               <InfoRow
                 label="Cast"
-                value={
-                  actors && (
-                    <p>
-                      <span>Cast: </span>
-                      {actors}
-                    </p>
-                  )
-                }
+                value={actors}
               />
-              <InfoRow label="Overview:" value={data?.overview} />
+              <InfoRow label="Overview" value={data?.overview} />
             </div>
           </div>
           <MovieTrailer

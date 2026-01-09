@@ -7,8 +7,7 @@ export const Header = () => {
   const dispatch = useDispatch();
   return (
     <nav className="flex flex-col gap-4 p-4 text-white">
-      <div className="flex w-full justify-between items-center">
-        <h1 className="font-bold">MOVIE APP</h1>
+      <div className="flex justify-between">
         <div className="flex gap-4">
           <NavLink
             to="/"
@@ -31,6 +30,9 @@ export const Header = () => {
           >
             Favorites
           </NavLink>
+        </div>
+        <div>
+          <h1 className="font-bold">MOVIE APP</h1>
         </div>
       </div>
       <div className="w-full mt-2 md:max-w-md">

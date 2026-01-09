@@ -1,3 +1,4 @@
+import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import { memo } from "react";
 
 interface Page {
@@ -7,18 +8,25 @@ interface Page {
 }
 
 export const PageButton = memo(({ currentPage, totalPage, action }: Page) => {
-  const pages = [currentPage - 1, currentPage, currentPage + 1];
-  const filteredPages = pages.filter(
-    (p) => p >= 1 && p <= totalPage && p <= 500
-  );
-
   return (
-    <div>
-      {filteredPages.map((p) => (
-        <button className="cursor-pointer ml-1.5 bg-gray-900 text-white" key={p} onClick={() => action(p)}>
-          {p}
-        </button>
-      ))}
+    <div className="flex mb-2 gap-3">
+      <ArrowBigLeft
+      size={30}
+        className={`cursor-pointer ${
+          currentPage === 1 ? "opacity-20 pointer-events-none" : ""
+        }`}
+        onClick={() => action(currentPage - 1)}
+      />
+      <p className="text-2xl">{currentPage}</p>
+      <ArrowBigRight
+      size={30}
+        className={`cursor-pointer ${
+          currentPage >= 500 || currentPage >= totalPage
+            ? "opacity-20 pointer-events-none"
+            : ""
+        }`}
+        onClick={() => action(currentPage + 1)}
+      />
     </div>
   );
-})
+});

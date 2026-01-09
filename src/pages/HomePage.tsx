@@ -21,6 +21,10 @@ export const Homepage = () => {
   const handlePageChange = useCallback(
     (number: number) => {
       dispatch(setPage(number));
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     },
     [dispatch]
   );
@@ -49,7 +53,7 @@ export const Homepage = () => {
 
   return (
     <>
-      <div className="flex px-4">
+      <div className="flex gap-8 md:gap-10 ml-2">
         <GenreSelect />
         <YearSelect />
         <ResetFilter />
@@ -63,6 +67,8 @@ export const Homepage = () => {
           : data?.results?.map((movie: FullMovie) => (
               <MovieListItem key={movie.id} movie={movie} />
             ))}
+      </div>
+      <div className="flex justify-center w-full">
         <PageButton
           currentPage={filters.page}
           totalPage={data?.total_pages || 1}

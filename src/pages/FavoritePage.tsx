@@ -22,11 +22,10 @@ export const FavoritePage = () => {
   }
   return (
     <>
-      <div className="m-2 mt-0">
+      <div className="mt-4 ml-4 -mb-4">
         <BackButton />
       </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 transition-opacity duration-500 m-2">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 transition-opacity duration-500 m-4">
         {movies.length === 0 ? (
           <span>No favorites</span>
         ) : (
