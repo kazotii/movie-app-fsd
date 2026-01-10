@@ -7,8 +7,6 @@ interface PortalProps {
 
 export const Portal = ({ children }: PortalProps) => {
   const container = document.getElementById("modal-root");
-
   if (!container) return null;
-
   return createPortal(children, container);
 };

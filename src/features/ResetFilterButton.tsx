@@ -11,4 +11,4 @@ export const ResetFilter = () => {
       Reset all
     </button>
   );
-}
+};

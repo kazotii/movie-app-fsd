@@ -9,15 +9,15 @@ export const SearchInput = () => {
   const query = useSelector((state: RootState) => state.filters.query);
   const [localValue, setLocalValue] = useState(query);
   const dispatch = useDispatch();
-  const Maps = useNavigate()
-  const location = useLocation()
+  const Maps = useNavigate();
+  const location = useLocation();
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLocalValue(e.target.value);
   };
   useEffect(() => {
     const TimeoutId = setTimeout(() => {
-      if(localValue.trim() && location.pathname !== '/'){
-        Maps('/')
+      if (localValue.trim() && location.pathname !== "/") {
+        Maps("/");
       }
       dispatch(setSearchQuery(localValue));
     }, 500);
@@ -37,7 +37,7 @@ export const SearchInput = () => {
 
   return (
     <input
-    className="w-full px-2 py-1 transition-all rounded-lg border border-white"
+      className="w-full px-2 py-1 transition-all rounded-lg border border-white"
       ref={inputRef}
       type="text"
       value={localValue}

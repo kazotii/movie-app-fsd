@@ -32,60 +32,74 @@ export const MoviePage = () => {
   const { data: videoKey } = useGetMovieVideosQuery(id ?? "");
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
 
+  if (error || !data) return <p>Sorry, error!</p>;
+
+  const poster = data.moviePosterPath;
+  const title = data.title;
+  const vote = data?.vote_average.toFixed(1);
+  const tagline = data.tagline ? `«${data.tagline}»` : null;
+  const country = data?.production_countries?.[0]?.name;
   const director = data?.credits?.crew.find(
     (person) => person.job === "Director"
   )?.name;
-  const actors = data?.credits?.cast
+  const release = data.release_date;
+  const genre = data.genres.map(g => g.name).join(", ");
+  const runtime = data.runtime ? `${data.runtime} min` : null;
+  const actors = data.credits?.cast
     .slice(0, 5)
     .map((actor) => actor.name)
     .join(", ");
-  const genre = data?.genres.map((genre) => (
-    <span key={genre.id}>{genre.name + ", "}</span>
-  ));
-  const vote = data?.vote_average.toFixed(1);
-  const country = data?.production_countries?.[0]?.name;
-  if (error) return <p>error bratik</p>;
+  const homepageUrl = data.homepage || null;
+  const revenue = data.revenue
+    ? `$${data.revenue.toLocaleString("en-US")}`
+    : null;
+  const overview = data.overview;
 
   return (
     <>
       {isLoading ? (
         <MovieDetailsSkeleton />
       ) : (
-        <div className="flex gap-10 flex-col md:flex-row max-w-7xl p-4">
+        <div className="flex gap-10 flex-col md:flex-row p-4">
           <div>
-            <div className="w-full md:w-80">
+            <div className="w-full md:w-86">
               <BackButton />
-              <img src={data?.moviePosterPath} />
+              <img src={poster} />
             </div>
             <div className="mt-3">
-              <FavoriteButton movie={data!} />
+              <FavoriteButton movie={data} />
               <TrailerButton onClick={() => setIsTrailerOpen(true)} />
             </div>
           </div>
-          <div>
-            <div className="flex flex-col gap-5 md:mt-6 -mt-7">
-              <h1 className="font-bold text-xl">{data?.title}</h1>
-              <InfoRow label="Vote" value={vote} />
+          <div className="flex-1 min-w-0 w-full flex flex-col gap-4 md:mt-6 -mt-7">
+            <h1 className="font-bold text-xl text-amber-400">{title}</h1>
+            <InfoRow label="Vote" value={vote} />
+            <InfoRow label="Tagline" value={tagline} />
+            <InfoRow label="Country" value={country} />
+            <InfoRow label="Director" value={director} />
+            <InfoRow label="Release" value={release} />
+            <InfoRow label="Genre" value={genre} />
+            <InfoRow label="Runtime" value={runtime} />
+            <InfoRow label="Cast" value={actors} />
+            {homepageUrl && (
               <InfoRow
-                label="Tagline"
-                value={data?.tagline ? `«${data.tagline}»` : null}
+                label="Homepage"
+                value={
+                  <a
+                    href={homepageUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-amber-500 hover:underline block truncate max-w-65 md:max-w-100"
+                  >
+                    {homepageUrl}
+                  </a>
+                }
               />
-              <InfoRow label="Country" value={country} />
-              <InfoRow
-                label="Director"
-                value={director}
-              />
-              <InfoRow label="Release date" value={data?.release_date} />
-              <InfoRow label="Genre" value={genre} />
-              <InfoRow
-                label="Runtime"
-                value={data?.runtime ? `${data.runtime} min` : null}
-              />
-              <InfoRow
-                label="Cast"
-                value={actors}
-              />
-              <InfoRow label="Overview" value={data?.overview} />
+            )}
+            <InfoRow label="Revenue" value={revenue} />
+            <div className="mb-1 pt-1 border-t border-white/10">
+              <p className="text-slate-500">Overview:</p>
+              <p className="text-slate-200 text-lg">{overview}</p>
             </div>
           </div>
           <MovieTrailer

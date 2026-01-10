@@ -32,7 +32,7 @@ export const Header = () => {
           </NavLink>
         </div>
         <div>
-          <h1 className="font-bold">MOVIE APP</h1>
+          <h1 className="font-bold text-base text-amber-400">MOVIE APP</h1>
         </div>
       </div>
       <div className="w-full mt-2 md:max-w-md">

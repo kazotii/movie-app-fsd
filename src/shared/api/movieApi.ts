@@ -28,7 +28,7 @@ const baseQueryWithPlugins: BaseQueryFn<
     args.params = {
       ...args.params,
       api_key: API_KEY,
-      language: "eng-US",
+      language: "en-US",
     };
   }
   const result = await rawBaseQuery(args, api, error);
@@ -39,10 +39,8 @@ export const movieApi = createApi({
   // base url + url + api_key + primary_release_year + with_genres
   reducerPath: "movieApi",
   baseQuery: baseQueryWithPlugins,
-  tagTypes: ["Movies"],
   endpoints: (builder) => ({
     getMovies: builder.query<TmdbResponse<FullMovie>, FilterParams>({
-      providesTags: ["Movies"],
       query: (filters) => {
         const filterUrl = "discover/movie";
         if (filters.query)

@@ -14,14 +14,20 @@ export const YearSelect = () => {
     (state: RootState) => state.filters.year
   );
   const dispatch = useDispatch();
-  const prefetch = useMoviePrefetch()
+  const prefetch = useMoviePrefetch();
   return (
     <>
-      <select className="cursor-pointer bg-gray-900 text-white" onMouseEnter={() => {prefetch()}}
+      <select
+        className="cursor-pointer bg-gray-900 text-white"
+        onMouseEnter={() => {
+          prefetch();
+        }}
         value={currentSelectedYear ?? 0}
         onChange={(e) => dispatch(setYear(Number(e.target.value)))}
       >
-        <option className="cursor-pointer" value={0}>Choose a year</option>
+        <option className="cursor-pointer" value={0}>
+          Choose a year
+        </option>
         {years.map((year) => (
           <option key={year} value={year}>
             {year}

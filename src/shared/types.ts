@@ -28,6 +28,8 @@ export interface MovieDetails extends Movie {
     cast: { id: number; name: string; character: string }[];
     crew: { id: number; name: string; job: string }[];
   };
+  revenue: number;
+  homepage: string;
 }
 
 export interface TmdbResponse<T> {

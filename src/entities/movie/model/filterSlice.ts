@@ -14,8 +14,7 @@ const urlQuery = searchParams.get("query");
 const validatedQuery = urlQuery ? urlQuery : "";
 
 const urlPage = searchParams.get("page");
-const validatedPage =
-  urlPage && !isNaN(Number(urlPage)) ? Number(urlPage) : 1;
+const validatedPage = urlPage && !isNaN(Number(urlPage)) ? Number(urlPage) : 1;
 
 export const filterSlice = createSlice({
   name: "filters",
@@ -23,23 +22,23 @@ export const filterSlice = createSlice({
     year: validatedYear,
     genreId: validatedGenre,
     query: validatedQuery,
-    page: validatedPage
+    page: validatedPage,
   },
   reducers: {
     setYear: (state, action) => {
       state.year = action.payload;
-      state.page = 1 
+      state.page = 1;
     },
     setGenre: (state, action) => {
       state.genreId = action.payload;
-      state.page = 1 
+      state.page = 1;
     },
     setSearchQuery: (state, action) => {
       state.query = action.payload;
-      state.page = 1 
+      state.page = 1;
     },
     setPage: (state, action) => {
-      state.page = action.payload
+      state.page = action.payload;
     },
     resetFilters: (state) => {
       state.year = null;

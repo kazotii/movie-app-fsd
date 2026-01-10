@@ -11,7 +11,7 @@ export const PageButton = memo(({ currentPage, totalPage, action }: Page) => {
   return (
     <div className="flex mb-2 gap-3">
       <ArrowBigLeft
-      size={30}
+        size={30}
         className={`cursor-pointer ${
           currentPage === 1 ? "opacity-20 pointer-events-none" : ""
         }`}
@@ -19,7 +19,7 @@ export const PageButton = memo(({ currentPage, totalPage, action }: Page) => {
       />
       <p className="text-2xl">{currentPage}</p>
       <ArrowBigRight
-      size={30}
+        size={30}
         className={`cursor-pointer ${
           currentPage >= 500 || currentPage >= totalPage
             ? "opacity-20 pointer-events-none"

@@ -17,15 +17,12 @@ export const MovieListItem = ({ movie }: MovieListItemProps) => {
     <div>
       <Link to={`/movie/${movie.id}`}>
         <div className="hover:scale-105 transition-transform">
-          <img
-            src={movie.moviePosterPath}
-            alt={movie.title}
-          />
+          <img src={movie.moviePosterPath} alt={movie.title} />
         </div>
       </Link>
       <div className="flex justify-between mt-2">
         <div>
-          <h1>{movie.title}</h1>
+          <h1 className="font-bold text-amber-400">{movie.title}</h1>
           <p>{movie.release_date.slice(0, 4)}</p>
         </div>
         <div className="flex justify-between">

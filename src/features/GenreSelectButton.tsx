@@ -11,7 +11,6 @@ export const GenreSelect = () => {
   );
   const dispatch = useDispatch();
   const prefetch = useMoviePrefetch();
-
   return (
     <>
       <select
