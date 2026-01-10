@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, isAction } from "@reduxjs/toolkit";
 import filterReducer from "../../entities/movie/model/filterSlice";
 import { movieApi } from "../../shared/api/movieApi";
 import type { Middleware } from "@reduxjs/toolkit";
@@ -6,7 +6,7 @@ import favoritesReducer from "../../entities/movie/model/favoriteSlice";
 
 const urlSyncMiddleware: Middleware = (store) => (next) => (action) => {
   const result = next(action);
-  if (action.type.startsWith("filters/")) {
+  if (isAction(action) && action.type.startsWith("filters/")) {
     const state = store.getState();
     const currentFilters = state.filters;
     const params = new URLSearchParams();
