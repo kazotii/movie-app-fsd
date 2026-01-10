@@ -10,7 +10,7 @@ import { ResetFilter } from "../features/ResetFilterButton";
 import { PageButton } from "../features/PageButton";
 import { setPage, setSearchQuery } from "../entities/movie/model/filterSlice";
 import { useCallback } from "react";
-import { ErrorItem } from "../shared/ui/error/ErrorItem";
+import { ErrorItem } from "../features/ErrorButton";
 import { SearchX, AlertCircle } from "lucide-react";
 
 export const Homepage = () => {

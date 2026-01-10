@@ -13,7 +13,7 @@ export const MovieTrailer = ({
 }: MovieTrailerProps) => {
   return (
     <Modal isOpen={isOpen} Close={Close}>
-      <div className="p-10 bg-slate-800 rounded-lg text-white">
+      <div className="p-4 bg-slate-800 rounded-lg text-white">
         {videoKey ? (
           <iframe className="w-full aspect-video h-auto sm:min-w-150"
             allowFullScreen

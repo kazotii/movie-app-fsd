@@ -12,7 +12,7 @@ export const Modal = ({ isOpen, Close, children }: ModalProps) => {
   if (isOpen)
     return (
       <Portal>
-        <div className="flex items-center justify-center fixed inset-0 bg-black/50" onClick={Close}>
+        <div className="flex items-center justify-center fixed inset-0 bg-black/50 p-5" onClick={Close}>
           <div onClick={((e) => e.stopPropagation())}>
             {children}
           </div>

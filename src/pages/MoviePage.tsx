@@ -63,7 +63,7 @@ export const MoviePage = () => {
             </div>
           </div>
           <div>
-            <div className="flex flex-col gap-5 md:mt-6">
+            <div className="flex flex-col gap-5 md:mt-6 -mt-7">
               <h1 className="font-bold text-xl">{data?.title}</h1>
               <InfoRow label="Vote" value={vote} />
               <InfoRow

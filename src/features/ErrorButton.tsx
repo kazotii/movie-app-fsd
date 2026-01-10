@@ -16,11 +16,11 @@ export const ErrorItem = ({
   Icon,
 }: ErrorStateProps) => {
   return (
-    <div className="flex flex-col items-center justify-center p-8 text-center">
+    <div className="flex flex-col items-center justify-center p-8 text-center gap-10">
       {Icon && <Icon size={64} className="mb-4 text-white"/>}
       <h1>{title}</h1>
       <p>{description}</p>
-      <button className="cursor-pointer" onClick={action}>{buttonText}</button>
+      <button className="cursor-pointer font-bold text-amber-400 border-b-2 border-amber-400" onClick={action}>{buttonText}</button>
     </div>
   );
 };

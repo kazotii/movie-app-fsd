@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../app/store/store";
 import { MovieListItem } from "../entities/movie/ui/MovieListItem";
 import { useNavigate } from "react-router-dom";
-import { ErrorItem } from "../shared/ui/error/ErrorItem";
+import { ErrorItem } from "../features/ErrorButton";
 import { Frown } from "lucide-react";
 import { BackButton } from "../features/BackButton";
 
