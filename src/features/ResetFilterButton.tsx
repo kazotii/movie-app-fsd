@@ -8,7 +8,7 @@ export const ResetFilter = () => {
       className="cursor-pointer bg-gray-900 text-white"
       onClick={() => dispatch(resetFilters())}
     >
-      Reset all
+      Reset
     </button>
   );
 };

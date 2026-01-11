@@ -22,6 +22,7 @@ export const Header = () => {
           </NavLink>
           <NavLink
             to="/favorites"
+            onClick={() => dispatch(setSearchQuery(""))}
             className={({ isActive }) =>
               isActive
                 ? "font-bold text-amber-400 border-b-2 border-amber-400"
