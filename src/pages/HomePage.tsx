@@ -53,7 +53,7 @@ export const Homepage = () => {
 
   return (
     <>
-      <div className="flex gap-4 md:gap-10 ml-2">
+      <div className="flex gap-3 md:gap-10 ml-2">
         <GenreSelect />
         <YearSelect />
         <ResetFilter />
