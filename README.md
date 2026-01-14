@@ -20,6 +20,8 @@ The main goal was to demonstrate how to build a scalable frontend application th
 * Dynamic Routing: Flexible detail pages using URL parameters and custom hooks.
 * Global Filtering: Centralized state for search queries, genres, and year filters.
 * Data Integrity: Comprehensive TypeScript interfaces for API responses and component props.
+* Smart Search: Debounce logic to optimize network traffic.
+* Responsive UI: Optimized for mobile, tablet, and desktop.
 
 ## ⚙️ Setup
 1. npm install
