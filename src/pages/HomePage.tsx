@@ -12,8 +12,10 @@ import { setPage, setSearchQuery } from "../entities/movie/model/filterSlice";
 import { useCallback } from "react";
 import { ErrorItem } from "../features/ErrorButton";
 import { SearchX, AlertCircle } from "lucide-react";
+import { useUrlSync } from "../entities/movie/model/useUrlSync";
 
 export const Homepage = () => {
+  useUrlSync()
   const filters = useSelector((state: RootState) => state.filters);
   const { data, isLoading, isFetching, error, refetch } =
     useGetMoviesQuery(filters);

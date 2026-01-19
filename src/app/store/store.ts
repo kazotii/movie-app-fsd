@@ -22,7 +22,7 @@ const urlSyncMiddleware: Middleware = (store) => (next) => (action) => {
     if (currentFilters.page) {
       params.set("page", currentFilters.page.toString());
     }
-    window.history.replaceState({}, "", `?${params.toString()}`);
+    window.history.pushState({}, "", `?${params.toString()}`);
   }
   return result;
 };
