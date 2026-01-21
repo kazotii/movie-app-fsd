@@ -22,8 +22,18 @@ const urlSyncMiddleware: Middleware = (store) => (next) => (action) => {
     if (currentFilters.page) {
       params.set("page", currentFilters.page.toString());
     }
-    window.history.pushState({}, "", `?${params.toString()}`);
+    
+    const newUrl = `?${params.toString()}`;
+    const isSearch = action.type === "filters/setSearchQuery";
+    const isPage = action.type === "filters/setPage";
+
+    if (isSearch || isPage) {
+      window.history.replaceState({}, "", newUrl);
+    } else {
+      window.history.pushState({}, "", newUrl);
+    }
   }
+
   return result;
 };
 
