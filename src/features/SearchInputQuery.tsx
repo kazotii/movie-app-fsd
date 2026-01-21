@@ -14,24 +14,27 @@ export const SearchInput = () => {
   }, [queryFromUrl]);
 
   useEffect(() => {
+    if (localValue === queryFromUrl) return;
     const timeoutId = setTimeout(() => {
       if (localValue.trim() && location.pathname !== "/") {
         navigate(`/?query=${encodeURIComponent(localValue)}`);
         return;
       }
       const newParams = new URLSearchParams(searchParams);
+      
       if (localValue) {
         newParams.set("query", localValue);
       } else {
         newParams.delete("query");
       }
       newParams.set("page", "1");
+      const shouldReplace = !!searchParams.get("query");
 
-      setSearchParams(newParams, { replace: true });
+      setSearchParams(newParams, { replace: shouldReplace });
     }, 500);
 
     return () => clearTimeout(timeoutId);
-  }, [localValue, navigate, location.pathname, searchParams, setSearchParams]);
+  }, [localValue, navigate, location.pathname, searchParams, setSearchParams, queryFromUrl]);
 
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
