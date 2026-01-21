@@ -1,17 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { SearchInput } from "../features/SearchInputQuery";
-import { useDispatch } from "react-redux";
-import { setSearchQuery } from "../entities/movie/model/filterSlice";
 
 export const Header = () => {
-  const dispatch = useDispatch();
   return (
     <nav className="flex flex-col gap-4 p-4 text-white">
       <div className="flex justify-between">
         <div className="flex gap-4">
           <NavLink
             to="/"
-            onClick={() => dispatch(setSearchQuery(""))}
             className={({ isActive }) =>
               isActive
                 ? "font-bold text-amber-400 border-b-2 border-amber-400"
@@ -22,7 +18,6 @@ export const Header = () => {
           </NavLink>
           <NavLink
             to="/favorites"
-            onClick={() => dispatch(setSearchQuery(""))}
             className={({ isActive }) =>
               isActive
                 ? "font-bold text-amber-400 border-b-2 border-amber-400"

@@ -23,7 +23,7 @@ export const MovieListItem = ({ movie }: MovieListItemProps) => {
       <div className="flex justify-between mt-2">
         <div>
           <h1 className="font-bold text-amber-400">{movie.title}</h1>
-          <p>{movie.release_date.slice(0, 4)}</p>
+          <p>{movie.release_date?.slice(0, 4)}</p>
         </div>
         <div className="flex justify-between">
           <FavoriteButton movie={movie} />

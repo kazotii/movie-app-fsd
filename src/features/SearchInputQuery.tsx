@@ -1,34 +1,37 @@
-import { useDispatch, useSelector } from "react-redux";
-import { setSearchQuery } from "../entities/movie/model/filterSlice";
-import type { RootState } from "../app/store/store";
-import type React from "react";
 import { useEffect, useState, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 export const SearchInput = () => {
-  const query = useSelector((state: RootState) => state.filters.query);
-  const [localValue, setLocalValue] = useState(query);
-  const dispatch = useDispatch();
-  const Maps = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const location = useLocation();
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLocalValue(e.target.value);
-  };
-  useEffect(() => {
-    const TimeoutId = setTimeout(() => {
-      if (localValue.trim() && location.pathname !== "/") {
-        Maps("/");
-      }
-      dispatch(setSearchQuery(localValue));
-    }, 500);
-    return () => {
-      clearTimeout(TimeoutId);
-    };
-  }, [dispatch, localValue, Maps, location]);
+
+  const queryFromUrl = searchParams.get("query") || "";
+  const [localValue, setLocalValue] = useState(queryFromUrl);
 
   useEffect(() => {
-    setLocalValue(query);
-  }, [query]);
+    setLocalValue(queryFromUrl);
+  }, [queryFromUrl]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (localValue.trim() && location.pathname !== "/") {
+        navigate(`/?query=${encodeURIComponent(localValue)}`);
+        return;
+      }
+      const newParams = new URLSearchParams(searchParams);
+      if (localValue) {
+        newParams.set("query", localValue);
+      } else {
+        newParams.delete("query");
+      }
+      newParams.set("page", "1");
+
+      setSearchParams(newParams, { replace: true });
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+  }, [localValue, navigate, location.pathname, searchParams, setSearchParams]);
 
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -41,7 +44,7 @@ export const SearchInput = () => {
       ref={inputRef}
       type="text"
       value={localValue}
-      onChange={handleInputChange}
+      onChange={(e) => setLocalValue(e.target.value)}
       placeholder="Search movies"
     />
   );

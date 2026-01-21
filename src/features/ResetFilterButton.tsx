@@ -1,12 +1,10 @@
-import { useDispatch } from "react-redux";
-import { resetFilters } from "../entities/movie/model/filterSlice";
-
+import { useSearchParams } from "react-router-dom";
 export const ResetFilter = () => {
-  const dispatch = useDispatch();
+  const [, setSearchParams] = useSearchParams();
   return (
     <button
       className="cursor-pointer bg-gray-900 text-white"
-      onClick={() => dispatch(resetFilters())}
+      onClick={() => setSearchParams({})}
     >
       Reset
     </button>
