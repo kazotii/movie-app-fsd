@@ -1,11 +1,11 @@
-# Movie App
-A high-performance movie discovery application utilizing the TMDB API. This project is built with a focus on Clean Architecture and Scalable State Management.
-
 <img width="1893" height="868" alt="image" src="https://github.com/user-attachments/assets/05bcc351-c644-4e99-b3d0-5ff4297bd063" />
 https://movie-app-fsd.vercel.app/
 
+# Movie App
+A high-performance movie discovery application utilizing the TMDB API. This project is built with a focus on Clean Architecture and Scalable State Management.
+
 ## Why this project?
-The main goal was to demonstrate how to build a scalable frontend application that respects server resources. By using **RTK Query caching** and **Debounced Search**, I reduced unnecessary API calls by over 60%.
+The main goal was to demonstrate how to build a scalable frontend application that respects server resources. By using **RTK Query caching** and **Debounced Search** I reduced unnecessary API calls by over 60%.
 
 ## Tech Stack
 * Framework: React 19 + TypeScript
