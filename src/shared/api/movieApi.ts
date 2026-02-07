@@ -14,6 +14,7 @@ import type {
   Genre,
   TmdbTrailerVideo,
 } from "../types";
+import { getPosterUrl } from "./utils";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -65,9 +66,7 @@ export const movieApi = createApi({
           ...response,
           results: response.results.map((movie: Movie) => ({
             ...movie,
-            moviePosterPath: movie.poster_path
-              ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-              : "https://via.placeholder.com/500x750?text=No+Poster",
+            moviePosterPath: getPosterUrl(movie.poster_path),
           })),
         };
       },
@@ -83,9 +82,7 @@ export const movieApi = createApi({
       transformResponse: (response: MovieDetails) => {
         return {
           ...response,
-          moviePosterPath: response.poster_path
-            ? `https://image.tmdb.org/t/p/w500${response.poster_path}`
-            : "https://via.placeholder.com/500x750?text=No+Poster",
+          moviePosterPath: getPosterUrl(response.poster_path),
         };
       },
     }),
